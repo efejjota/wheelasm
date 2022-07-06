@@ -1,0 +1,31 @@
+name: Assemble and test Win64
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+    - win64.asm
+  pull_request:
+    branches: [ main ]
+    paths:
+    - win64.asm
+
+  workflow_dispatch:
+
+jobs:
+  assemble-and-test:
+    runs-on: windows-latest
+    steps:
+    - uses: ilammy/setup-nasm@v1
+    - name: Check out the codebase
+      uses: actions/checkout@v2
+
+    - name: assemble-executable
+      run: nasm -fwin64 win64.asm && gcc win64.obj
+
+    - name: test-prints-helloworld
+      run: |-
+        $msg = &".\a.exe"
+        If ($msg -ne "Hello") {
+          exit 1
+        }

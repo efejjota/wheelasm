@@ -1,0 +1,22 @@
+name: Assemble and test Macho64
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  assemble-and-test:
+    runs-on: macos-latest
+    steps:
+    - uses: ilammy/setup-nasm@v1
+    - name: Check out the codebase
+      uses: actions/checkout@v2
+
+    - name: assemble-executable
+      run: nasm -fmacho64 macho64.asm && ld -e start -static macho64.o
+
+    - name: test-prints-helloworld
+      run: if [[ "$(./a.out)" != "Hello, World" ]]; then exit 1; fi

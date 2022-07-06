@@ -1,4 +1,4 @@
-name: Assemble Hello World
+name: Assemble and test Elf64
 
 on:
   push:
@@ -16,7 +16,7 @@ jobs:
       uses: actions/checkout@v2
 
     - name: assemble-executable
-      run: nasm -felf64 hello.asm && ld hello.o
+      run: nasm -felf64 elf64.asm && ld elf64.o
 
     - name: test-prints-helloworld
       run: if [[ "$(./a.out)" != "Hello, World" ]]; then exit 1; fi

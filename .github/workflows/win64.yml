@@ -1,0 +1,27 @@
+name: Assemble and test Win64
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  assemble-and-test:
+    runs-on: windows-latest
+    steps:
+    - uses: ilammy/setup-nasm@v1
+    - name: Check out the codebase
+      uses: actions/checkout@v2
+
+    - name: assemble-executable
+      run: nasm -fwin64 win64.asm && gcc win64.o
+
+    - name: test-prints-helloworld
+      run: |-
+        @echo off
+        FOR /F "tokens=*" %%F IN ('"a"') DO SET msg=%%F
+        IF "%msg%"!="Hello" (
+          EXIT
+        )

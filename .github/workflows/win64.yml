@@ -3,8 +3,13 @@ name: Assemble and test Win64
 on:
   push:
     branches: [ main ]
+    paths:
+    - win64.asm
   pull_request:
     branches: [ main ]
+    paths:
+    - win64.asm
+
   workflow_dispatch:
 
 jobs:

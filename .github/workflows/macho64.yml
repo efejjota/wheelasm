@@ -3,8 +3,14 @@ name: Assemble and test Macho64
 on:
   push:
     branches: [ main ]
+    paths:
+    - macho64.asm
+
   pull_request:
     branches: [ main ]
+    paths:
+    - macho64.asm
+
   workflow_dispatch:
 
 jobs:

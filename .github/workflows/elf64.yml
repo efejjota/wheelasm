@@ -3,8 +3,14 @@ name: Assemble and test Elf64
 on:
   push:
     branches: [ main ]
+    paths:
+    - elf64.asm
+
   pull_request:
     branches: [ main ]
+    paths:
+    - elf64.asm
+
   workflow_dispatch:
 
 jobs:

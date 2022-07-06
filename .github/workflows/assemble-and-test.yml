@@ -1,0 +1,22 @@
+name: Assemble Hello World
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  assemble-and-test:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: ilammy/setup-nasm@v1
+    - name: Check out the codebase
+      uses: actions/checkout@v2
+
+    - name: assemble-executable
+      run: nasm -felf64 hello.asm && ld hello.o
+
+    - name: test-prints-helloworld
+      run: if [[ "$(./a.out)" != "Hello, World" ]]; then exit 1; fi

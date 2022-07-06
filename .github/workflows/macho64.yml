@@ -22,7 +22,7 @@ jobs:
       uses: actions/checkout@v2
 
     - name: assemble-executable
-      run: nasm -fmacho64 macho64.asm && ld -e start -static macho64.o
+      run: nasm -fmacho64 macho64.asm && ld -e start -static macho64.o -o macho64
 
     - name: test-prints-helloworld
-      run: if [[ "$(./a.out)" != "Hello, World" ]]; then exit 1; fi
+      run: if [[ "$(./macho64)" != "Hello, World" ]]; then exit 1; fi

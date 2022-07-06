@@ -25,7 +25,6 @@ jobs:
 
     - name: test-prints-helloworld
       run: |-
-        Get-ChildItem | ForEach-Object { $_.FullName }
         $msg = &".\a.exe"
         If ($msg -ne "Hello") {
           exit 1

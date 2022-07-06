@@ -21,11 +21,11 @@ jobs:
       uses: actions/checkout@v2
 
     - name: assemble-executable
-      run: nasm -fwin64 win64.asm && gcc win64.obj
+      run: nasm -fwin64 win64.asm && gcc win64.obj -o win64.exe
 
     - name: test-prints-helloworld
       run: |-
-        $msg = &".\a.exe"
+        $msg = &".\win64.exe"
         If ($msg -ne "Hello") {
           exit 1
         }

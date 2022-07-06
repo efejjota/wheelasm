@@ -20,8 +20,7 @@ jobs:
 
     - name: test-prints-helloworld
       run: |-
-        @echo off
-        FOR /F "tokens=*" %%F IN ('"a"') DO SET msg=%%F
-        IF "%msg%"!="Hello" (
-          EXIT
-        )
+        $msg = &"a"
+        If ($msg -ne "Hello") {
+          exit 1
+        }

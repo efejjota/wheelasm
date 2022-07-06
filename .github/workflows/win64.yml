@@ -16,7 +16,7 @@ jobs:
       uses: actions/checkout@v2
 
     - name: assemble-executable
-      run: nasm -fwin64 win64.asm && gcc win64.o
+      run: nasm -fwin64 win64.asm && gcc win64.obj
 
     - name: test-prints-helloworld
       run: |-
